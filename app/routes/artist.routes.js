@@ -1,19 +1,19 @@
 module.exports = app => {
-  const artists = require("../controllers/artist.controller.js");
+  const songs = require("../controllers/song.controller.js");
   var router = require("express").Router();
-  // Create a new Artist for a Album
-  router.post("/:albumId/artists/", artists.create);
-  // Retrieve all Artists for a Album
-  router.get("/:albumId/artists/", artists.findAll);
-  // Retrieve all published Artists for a Album
-  router.get("/:albumId/artists/published", artists.findAllPublished);
-  // Retrieve a single Artist with id
-  router.get("/:albumId/artists/:id", artists.findOne);
-  // Update a Artist with id
-  router.put("/:albumId/artists/:id", artists.update);
-  // Delete a Artist with id
-  router.delete("/:albumId/artists/:id", artists.delete);
-  // Delete all Artists
-  router.delete("/:albumId/artists/:id", artists.deleteAll);
+  // Create a new Song for a Album
+  router.post("/:albumId/songs/", songs.create);
+  // Retrieve all Songs for a Album
+  router.get("/:albumId/songs/", songs.findAll);
+  // Retrieve all published Songs for a Album
+  router.get("/:albumId/songs/published", songs.findAllPublished);
+  // Retrieve a single Song with id
+  router.get("/:albumId/songs/:id", songs.findOne);
+  // Update a Song with id
+  router.put("/:albumId/songs/:id", songs.update);
+  // Delete a Song with id
+  router.delete("/:albumId/songs/:id", songs.delete);
+  // Delete all Songs
+  router.delete("/:albumId/songs/:id", songs.deleteAll);
   app.use('/api/albums', router);
 };

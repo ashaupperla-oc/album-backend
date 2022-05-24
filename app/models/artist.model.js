@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Artist = sequelize.define("artist", {
+  const Song = sequelize.define("song", {
     title: {
       type: Sequelize.STRING
     },
@@ -10,5 +10,5 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BOOLEAN
     }
   });
-  return Artist;
+  return Song;
 };

@@ -1,7 +1,7 @@
 const db = require("../models");
-const Artist = db.artists;
+const Song = db.songs;
 const Op = db.Sequelize.Op;
-// Create and Save a new Artist
+// Create and Save a new Song
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
@@ -11,138 +11,138 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Artist
-  const artist = {
+  // Create a Song
+  const song = {
     albumId: req.params.albumId,
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false
   };
-  // Save Artist in the database
-  Artist.create(artist)
+  // Save Song in the database
+  Song.create(song)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Artist."
+          err.message || "Some error occurred while creating the Song."
       });
     });
 };
-// Retrieve all Artists from the database.
+// Retrieve all Songs from the database.
 exports.findAll = (req, res) => {
-  const artistId = req.query.artistId;
-  var condition = artistId ? {
-    artistId: {
-      [Op.like]: `%${artistId}%`
+  const songId = req.query.songId;
+  var condition = songId ? {
+    songId: {
+      [Op.like]: `%${songId}%`
     }
   } : null;
 
-  Artist.findAll({ where: condition })
+  Song.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving artists."
+          err.message || "Some error occurred while retrieving songs."
       });
     });
 };
-// Find a single Artist with an id
+// Find a single Song with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  Artist.findByPk(id)
+  Song.findByPk(id)
     .then(data => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Artist with id=${id}.`
+          message: `Cannot find Song with id=${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Artist with id=" + id
+        message: "Error retrieving Song with id=" + id
       });
     });
 };
-// Update a Artist by the id in the request
+// Update a Song by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
-  Artist.update(req.body, {
+  Song.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Artist was updated successfully."
+          message: "Song was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Artist with id=${id}. Maybe Artist was not found or req.body is empty!`
+          message: `Cannot update Song with id=${id}. Maybe Song was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Artist with id=" + id
+        message: "Error updating Song with id=" + id
       });
     });
 };
-// Delete a Artist with the specified id in the request
+// Delete a Song with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-  Artist.destroy({
+  Song.destroy({
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Artist was deleted successfully!"
+          message: "Song was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Artist with id=${id}. Maybe Artist was not found!`
+          message: `Cannot delete Song with id=${id}. Maybe Song was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Artist with id=" + id
+        message: "Could not delete Song with id=" + id
       });
     });
 };
-// Delete all Artists from the database.
+// Delete all Songs from the database.
 exports.deleteAll = (req, res) => {
-  Artist.destroy({
+  Song.destroy({
     where: {},
     truncate: false
   })
     .then(nums => {
-      res.send({ message: `${nums} Artists were deleted successfully!` });
+      res.send({ message: `${nums} Songs were deleted successfully!` });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all artists."
+          err.message || "Some error occurred while removing all songs."
       });
     });
 };
-// Find all published Artists
+// Find all published Songs
 exports.findAllPublished = (req, res) => {
-  const artistId = req.query.artistId;
+  const songId = req.query.songId;
 
-  Artist.findAll({ where: { published: true } })
+  Song.findAll({ where: { published: true } })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving artists."
+          err.message || "Some error occurred while retrieving songs."
       });
     });
 };
