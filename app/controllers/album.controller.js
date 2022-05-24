@@ -13,7 +13,7 @@ exports.create = (req, res) => {
   // Create a Album
   const album = {
     title: req.body.title,
-    description: req.body.description,
+    artist: req.body.artist,
     published: req.body.published ? req.body.published : false
   };
   // Save Album in the database
