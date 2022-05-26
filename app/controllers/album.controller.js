@@ -43,3 +43,45 @@ exports.findAll = (req, res) => {
       });
     });
 };
+// Find a single Album with an id
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+  Album.findByPk(id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Album with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Album with id=" + id
+      });
+    });
+};
+// Update a Album by the id in the request
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Album.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Album was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Album with id=${id}. Maybe Album was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Album with id=" + id
+      });
+    });
+};
