@@ -85,7 +85,6 @@ exports.update = (req, res) => {
       });
     });
 };
-
 // Delete a Album with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -106,22 +105,6 @@ exports.delete = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Could not delete Album with id=" + id
-      });
-    });
-};
-// Delete all Albums from the database.
-exports.deleteAll = (req, res) => {
-  Album.destroy({
-    where: {},
-    truncate: false
-  })
-    .then(nums => {
-      res.send({ message: `${nums} Albums were deleted successfully!` });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all albums."
       });
     });
 };
