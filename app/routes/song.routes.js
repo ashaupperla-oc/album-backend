@@ -5,8 +5,6 @@ module.exports = app => {
   router.post("/:albumId/songs/", songs.create);
   // Retrieve all Songs for a Album
   router.get("/:albumId/songs/", songs.findAll);
-  // Retrieve all published Songs for a Album
-  router.get("/:albumId/songs/published", songs.findAllPublished);
   // Retrieve a single Song with id
   router.get("/:albumId/songs/:id", songs.findOne);
   // Update a Song with id

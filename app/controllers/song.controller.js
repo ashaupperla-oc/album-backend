@@ -15,8 +15,7 @@ exports.create = (req, res) => {
   const song = {
     albumId: req.params.albumId,
     title: req.body.title,
-    description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    genre: req.body.genre,
   };
   // Save Song in the database
   Song.create(song)
@@ -128,21 +127,6 @@ exports.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all songs."
-      });
-    });
-};
-// Find all published Songs
-exports.findAllPublished = (req, res) => {
-  const songId = req.query.songId;
-
-  Song.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving songs."
       });
     });
 };
