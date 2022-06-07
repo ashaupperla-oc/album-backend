@@ -6,9 +6,6 @@ module.exports = (sequelize, Sequelize) => {
     artist: {
       type: Sequelize.STRING
     },
-    published: {
-      type: Sequelize.BOOLEAN
-    }
   });
   return Album;
 };

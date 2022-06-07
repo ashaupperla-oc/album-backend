@@ -3,12 +3,9 @@ module.exports = (sequelize, Sequelize) => {
     title: {
       type: Sequelize.STRING
     },
-    description: {
+    genre: {
       type: Sequelize.STRING
     },
-    published: {
-      type: Sequelize.BOOLEAN
-    }
   });
   return Song;
 };

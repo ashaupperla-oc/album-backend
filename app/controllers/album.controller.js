@@ -14,7 +14,6 @@ exports.create = (req, res) => {
   const album = {
     title: req.body.title,
     artist: req.body.artist,
-    published: req.body.published ? req.body.published : false
   };
   // Save Album in the database
   Album.create(album)
@@ -121,19 +120,6 @@ exports.deleteAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all albums."
-      });
-    });
-};
-// Find all published Albums
-exports.findAllPublished = (req, res) => {
-  Album.findAll({ where: { published: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving albums."
       });
     });
 };
